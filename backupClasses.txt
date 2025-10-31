@@ -1,0 +1,98 @@
+                conn.setAutoCommit(false);
+
+                PreparedStatement delete_reviews = conn.prepareStatement(
+                "DELETE FROM Review WHERE Section_ID = ?");
+
+                PreparedStatement delete_sections = conn.prepareStatement(
+                "DELETE FROM CLASSES_SECTIONS WHERE Section_ID = ?");
+     
+                delete_reviews.setString(1, request.getParameter("hiddenSID"));
+                delete_sections.setString(1, request.getParameter("hiddenSID"));
+                 
+                delete_reviews.executeUpdate();
+                delete_sections.executeUpdate();
+
+
+                PreparedStatement classes = conn.prepareStatement(
+                ("UPDATE CLASSES SET Enroll_Limit = ? WHERE Section_ID = ?"));
+
+                PreparedStatement sections = conn.prepareStatement(
+                ("INSERT INTO CLASSES_SECTIONS VALUES (?, ?, ?, ?, ?, ?, ?, ?)"));
+
+                PreparedStatement offers = conn.prepareStatement(
+                ("UPDATE OFFERING SET Course_ID = ?, Term = ?, Year_C = ?, Title = ? WHERE Section_ID = ?"));
+
+                PreparedStatement exams = conn.prepareStatement(
+                ("UPDATE EXAM SET Dates = ?, Time_C = ?, Building = ?, Room = ? WHERE Section_ID = ?"));
+
+                classes.setInt(1, Integer.parseInt(request.getParameter("Limit")));
+                classes.setString(2, request.getParameter("hiddenSID"));
+                classes.executeUpdate();
+
+                classes.close();
+
+                if (request.getParameter("Number") != null){
+                    offers.setString(1, request.getParameter("Number"));
+                    offers.setString(2, request.getParameter("Term"));
+                    offers.setInt(3, Integer.parseInt(request.getParameter("Year")));
+                    offers.setString(4, request.getParameter("Title"));
+                    offers.setString(5, request.getParameter("hiddenSID"));
+                    offers.executeUpdate();
+
+                    offers.close();
+                }
+
+                if (request.getParameter("Instructor") != null){
+                    String[] meeting = request.getParameterValues("Type");
+                    String[] mandatory = request.getParameterValues("Mandatory");
+                    String[] days = request.getParameterValues("Day");
+                    String[] time = request.getParameterValues("Time");
+                    String[] building = request.getParameterValues("Building");
+                    String[] room = request.getParameterValues("Room");
+                
+                    for(int i = 0; i < meeting.length; i++) {
+                        sections.setString(1, request.getParameter("hiddenSID"));
+                        sections.setString(2, meeting[i]);
+                        sections.setString(3, mandatory[i]);
+                        sections.setString(4, days[i]);
+                        sections.setString(5, time[i]);
+                        sections.setString(6, building[i]);
+                        sections.setString(7, room[i]);
+                        sections.setString(8, request.getParameter("Instructor"));
+                        sections.executeUpdate();
+                    }
+                    sections.close();
+                }
+                
+                if (request.getParameterValues("Review") != null){
+                    PreparedStatement reviews = conn.prepareStatement(
+                        ("INSERT INTO REVIEW VALUES (?, ?, ?, ?, ?)"));
+                    String[] review_sections = request.getParameterValues("Review");
+
+                    for(int i = 0; i < review_sections.length; i++) {
+                        String[] elements = review_sections[i].trim().split(",");
+                        reviews.setString(1, request.getParameter("hiddenSID"));
+                        reviews.setString(2, elements[0].trim());
+                        reviews.setString(3, elements[1].trim());
+                        reviews.setString(4, elements[2].trim());
+                        reviews.setString(5, elements[3].trim());
+                        reviews.executeUpdate();           
+                    }
+                    reviews.close();
+                }
+                
+                String exam_input = request.getParameter("Final");
+                String[] exam_elements = exam_input.split(",");
+
+                exams.setString(1, exam_elements[0].trim());
+                exams.setString(2, exam_elements[1].trim());
+                exams.setString(3, exam_elements[2].trim());
+                exams.setString(4, exam_elements[3].trim());
+                exams.setString(5, request.getParameter("hiddenSID"));
+                exams.executeUpdate();
+                exams.close();
+
+                conn.commit();
+                conn.setAutoCommit(true);
+
+

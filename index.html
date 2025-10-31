@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>CSE 132B Project</title>
+    <script src="/CSE132B/script.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 30%;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content .main_container {
+            padding: 10px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: lightblue;
+        }
+        .dropbtn{
+            border-radius: 10px;
+            border: none;
+            font-family: Lucida Console;
+            font-size: 20px;
+            color: orange;
+        }
+
+
+
+
+        #second_div{
+            margin-top: 10px;
+        }
+
+        #third_div{
+            margin-top: 10px;
+        }
+
+        .unordered_list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .unordered_list li{
+            display: inline-block;
+            font-family: Lucida Handwriting;
+            font-size: 1em;
+            margin-right: 5%;
+            border-radius: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .unordered_list li:hover{
+            background-color: orange;
+        }
+
+        .unordered_list li a{
+            text-decoration: none;
+        }
+
+        .main_container {
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: black;
+            text-align: center;
+        }
+        h2{
+            font-size: 15px;
+            margin-top: 0px;
+            color: lightblue;
+        }
+        h1{
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+
+
+
+
+<body>
+    <h1>Data Entry Menu</h1>
+    <h2>Author: YuBo Chen && XuanXuan Pan</h2>
+
+    <div class="dropdown">
+        <button class="dropbtn">Main Menu</button>
+        <div class="dropdown-content">
+    
+            <div class="main_container" >
+                <ul class="unordered_list">
+                    <li>
+                        <a href="/CSE132B/homePage.jsp">Home<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Course/courses.jsp">Courses<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Classes/classes.jsp">Classes<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Student/students.jsp">Students<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Faculty/faculty.jsp">Faculty<a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="main_container" id="second_div">
+                <ul class="unordered_list">
+                    <li>
+                        <a href="/CSE132B/Enroll/courseList.jsp">Register Classes<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Enroll/enroll.jsp">Current Enrollment<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Taken/past_Course.jsp">Insert Taken Classes<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Taken/taken.jsp">Past Taken Courses<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Thesis/thesis.jsp">ThesisCommittee<a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="main_container" id="third_div">
+                <ul class="unordered_list">
+                    <li>
+                        <a href="/CSE132B/Probation/probation.jsp">Probation<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/Degrees/degree_sum.jsp">Degrees<a>
+                    </li>
+
+                    <li>
+                        <a href="/CSE132B/MS-Concentration/ms_degree_con.jsp">MS Degree Concentration<a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Query</button>
+        <div class="dropdown-content">
+            <div class="main_container">
+                <ul class="unordered_list">
+                    
+                    <li><a href="/CSE132B/Query/Student Part/student_current.jsp">Student Current Enrollment</a></li>
+                    <li><a href="/CSE132B/Query/Class Part/class_roster.jsp">Roster of Class</a></li>
+                    <li><a href="/CSE132B/Query/Student Part/student_past.jsp">Grade Report</a></li>
+                    <li><a href="/CSE132B/Query/Degree/ugStudent.jsp">Undergraduate Degree Report</a></li>
+                    <li><a href="/CSE132B/Query/Degree/msStudent.jsp">MS Degree Report</a></li>
+                    <li><a href="/CSE132B/Query/Student Part/student_schedule.jsp">Student Schedule</a></li>
+
+                    
+                </ul>
+
+                <div class="main_container">
+                    <ul class="unordered_list">
+                        
+                        <li><a href="/CSE132B/Query/Review Part/review.jsp">Review Schedule</a></li>
+                        <li><a href="/CSE132B/Query/Decision Part/decisionForm.jsp">Decision Support</a></li>
+                        <li><a href="/CSE132B/Query/Materialized View/MForm.jsp">Materialized Decision Support</a></li>
+    
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+</body>
+</html>

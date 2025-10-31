@@ -1,0 +1,46 @@
+CREATE TABLE COURSES (
+    Numbers         VARCHAR(10) NOT NULL,
+    Department      VARCHAR(30) NOT NULL,
+    Consent         VARCHAR(10) NOT NULL,
+    LabReq          VARCHAR(10) NOT NULL,
+    PRIMARY KEY     (Numbers)
+);
+
+CREATE TABLE COURSE_CATEGORY (
+    Course_ID       VARCHAR(10) NOT NULL,
+    Category        VARCHAR(20),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
+
+CREATE TABLE COURSE_PREREQ (
+    Course_ID       VARCHAR(10) NOT NULL,
+    Prerequisites   VARCHAR(10),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
+
+
+CREATE TABLE COURSE_UNITS (
+    Course_ID       VARCHAR(10) NOT NULL,
+    Units           INTEGER NOT NULL,
+    PRIMARY KEY     (Course_ID, Units),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
+
+CREATE TABLE COURSE_OLDNUM (
+    Course_ID       VARCHAR(10) NOT NULL,
+    OLD_NUMBERS     VARCHAR(10),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
+
+CREATE TABLE COURSE_COREQ (
+    Course_ID       VARCHAR(10) NOT NULL,
+    COREQ_ID        VARCHAR(10),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
+
+CREATE TABLE GRADE_OPTIONS (
+    Course_ID       VARCHAR(10) NOT NULL,
+    Grades          VARCHAR(10) NOT NULL,
+    PRIMARY KEY     (Course_ID, Grades),
+    FOREIGN KEY     (Course_ID) REFERENCES COURSES(Numbers) ON DELETE CASCADE
+);
